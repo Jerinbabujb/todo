@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<br>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6">
+           <div class="shadow myform">
+            <form class="inp" method="post">
+                {% csrf_token %}
+  <div class="mb-3">
+    <label  class="form-label">Enter the task</label>
+    <input type="text" class="form-control" name="ent"  aria-describedby="emailHelp">
+
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">Priority</label>
+    <input type="text" class="form-control" name="prior" >
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">Deadline</label>
+    <input type="date" class="form-control" name="date" >
+  </div>
+  <button type="submit" class="btn btn-dark">Submit</button>
+</form>
+           </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <h2>Tasks to be completed</h2>
+
+              {% for i in obj %}
+            <div class="shadow card" style="width: 230;">
+  <div class="card-body">
+    <h3 class="card-title">{{i.name}}</h3>
+    <h5 class="card-text">{{i.priority}}</h5>
+      <h5>Deadline:  {{i.date}}</h5>
+    <a href="{% url 'delete' i.id %}" class="btn btn-danger">Done</a>
+      <a href="{% url 'update' i.id %}" class="btn btn-warning">Update</a>
+  </div>
+</div><br>
+{% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+</body>
+</html>
